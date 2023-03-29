@@ -8,10 +8,12 @@ const connection = require('../DATABASE/database')
 //*****************************REPORT*************************************** */
 //GET DATA
 router.get('/report', (req,res) => {
-    let sql = `SELECT reportId, job_status, sta.firstname, sta.lastname, referenceNo, category, description, date_to_fix, image
+    let sql = `SELECT reportId, rep.jobcardId, job_status, sta.firstname, sta.lastname, referenceNo, category, time, description, date_to_fix, image
                 from report rep, jobcard job, staff sta
                 WHERE sta.staffId = job.staffId
                 and job.jobcardId = rep.jobcardId`
+                //and job_status <> ""
+                // and artisanNo =?
     connection.query(sql,(err,results)=>{
         if(err)
         {
@@ -57,6 +59,8 @@ router.post('/report', (req,res) => {
 })
 //update DATA
 router.put('/update_status/:id', (req,res) => {
+    console.log(req.body.job_status, req.params.id, req.body.jobcardId)
+
     let sql = `UPDATE report
                 Set job_status = ?
                 WHERE reportId =?

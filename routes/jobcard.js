@@ -7,7 +7,7 @@ const connection = require('../DATABASE/database')
 //*****************************JOB CARD************************************ */
 //GET DATA AACORDING TO MY LOCATION
 router.get('/jobcard', (req, res) => {
-    let sql = `SELECT jobcardId, referenceNo, vanue, category, description, date_created, date_to_fix, image, job.artisanId, art.firstname as aFirstname, art.lastname as aLastname, sta.staffNo, sta.firstname as sFirstname, sta.lastname as sLastname
+    let sql = `SELECT jobcardId, referenceNo, vanue, category, description, date_created, date_to_fix, time, image, job.artisanId, art.firstname as aFirstname, art.lastname as aLastname, sta.staffNo, sta.firstname as sFirstname, sta.lastname as sLastname
     FROM jobcard job, artisan art, staff sta
     where sta.staffId = job.staffId
     and job.artisanId = art.artisanId`
@@ -75,9 +75,9 @@ router.post('/jobcard', (req, res) => {
             let staffId = rows[0].staffId;
             let artisanId = 1;
 
-            let sql = `insert into jobcard(referenceNo, vanue, category, description,date_created, date_to_fix, image, staffId, artisanId)
-            VALUES(?,?,?,?,?,?,?,?,?)`;
-            let paramsValue = [reference, params.vanue, params.category, params.description, todayDate, params.to_fix, params.image, staffId, artisanId];
+            let sql = `insert into jobcard(referenceNo, vanue, category, description,date_created, date_to_fix, time, image, staffId, artisanId)
+            VALUES(?,?,?,?,?,?,?,?,?,?)`;
+            let paramsValue = [reference, params.vanue, params.category, params.description, todayDate, params.date_to_fix, params.time, params.image, staffId, artisanId];
             
 
             connection.query(sql, paramsValue, (err, results) => {
