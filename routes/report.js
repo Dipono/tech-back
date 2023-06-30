@@ -8,10 +8,8 @@ const connection = require('../DATABASE/database')
 //*****************************REPORT*************************************** */
 //GET DATA
 router.get('/report', (req,res) => {
-    let sql = `SELECT reportId, rep.jobcardId, job_status, sta.firstname, sta.lastname, referenceNo, category, time, description, date_to_fix, image
-                from report rep, jobcard job, staff sta
-                WHERE sta.staffId = job.staffId
-                and job.jobcardId = rep.jobcardId`
+    let sql = `SELECT *
+                from report rep`
                 //and job_status <> ""
                 // and artisanNo =?
     connection.query(sql,(err,results)=>{
