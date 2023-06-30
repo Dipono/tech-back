@@ -2,10 +2,10 @@
 //CONNECTING TO THE DB
 const connection = mysql.createConnection({
     connectionLimit : 10,
-    host            : 'localhost',
-    user            : 'root',
-    password        : '',
-    database        : 'technical-service'
+    host            : 'sql8.freemysqlhosting.net',
+    user            : 'sql8629674',
+    password        : '9mzMguETRD',
+    database        : 'sql8629674'
 })
 //CHECK CONNECTION
 connection.connect(function(err) {
